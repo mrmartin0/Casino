@@ -1,5 +1,6 @@
+package martin.matthew.casino;
+
 import java.util.*;
-import java.util.concurrent.Callable;
 
 /**
  * Created by matthewmartin on 1/27/17.
@@ -25,17 +26,6 @@ class GoFishGame {
         }
     }
 
-    public void seePlayerHand() {
-        for (Cards c : playerHand) {
-            c.seeCards();
-        }
-    }
-
-    public void seeDealerHand() {
-        for (Cards c : dealerHand) {
-            c.seeCards();
-        }
-    }
 
     public boolean getIfGameIsOver() {
         if ((playerScore > 6) || (dealerScore > 6)) {
@@ -46,6 +36,7 @@ class GoFishGame {
         return false;
     }
 
+
     public String getWinner() {
         if (playerScore > dealerScore) {
             return "You win!!!";
@@ -55,20 +46,24 @@ class GoFishGame {
         return "Tie game.";
     }
 
+
     public void playerTakeCard() {
         goFishDeck.shuffleDeck();
         playerHand.add(goFishDeck.takeTopCard());
     }
+
 
     public void dealerTakeCard() {
         goFishDeck.shuffleDeck();
         dealerHand.add(goFishDeck.takeTopCard());
     }
 
+
     public String playerAsksDealer() {
         System.out.println("What card do you think the dealer has?");
          return scan.nextLine();
     }
+
 
     public Values formatUserInputPlayerAskingDealer(String playerChoice) {
      //   String playerChoice = playerAsksDealer();
@@ -119,6 +114,7 @@ class GoFishGame {
         }
         return result;
     }
+
 
     public int checkDealersHandForMatch(Values playerChoiceValue) {
         matchCounter = 0;

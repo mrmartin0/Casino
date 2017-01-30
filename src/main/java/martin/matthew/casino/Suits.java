@@ -1,3 +1,5 @@
+package martin.matthew.casino;
+
 /**
  * Created by matthewmartin on 1/27/17.
  */

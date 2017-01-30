@@ -1,6 +1,10 @@
-import org.junit.Assert.*;
+package martin.matthew.casino;
+
+import martin.matthew.casino.Cards;
+import martin.matthew.casino.GoFishGame;
+import martin.matthew.casino.Suits;
+import martin.matthew.casino.Values;
 import org.junit.Test;
-import sun.text.bidi.BidiBase;
 
 import java.util.ArrayList;
 
@@ -30,13 +34,13 @@ public class GoFishGameTest {
 
     @Test
 
-     public void matchCounterTest() {
+    public void matchCounterTest() {
 
         GoFishGame goFishGame = new GoFishGame();
         goFishGame.goFishDealCards();
         int actual = goFishGame.checkDealersHandForMatch(Values.TWO);
         int expected = 1;
-        assertEquals("I expect the dealer to have a TWO",expected,actual);
+        assertEquals("I expect the dealer to have a TWO", expected, actual);
     }
 
     @Test
@@ -46,7 +50,7 @@ public class GoFishGameTest {
         GoFishGame goFishGame = new GoFishGame();
         goFishGame.goFishDealCards();
         goFishGame.playerTakesDealersCard(Values.TWO);
-        ArrayList<Cards>testHand = new ArrayList<Cards>();
+        ArrayList<Cards> testHand = new ArrayList<Cards>();
         testHand.add(aceOfSpades);
         testHand.add(threeOfSpades);
         testHand.add(fiveOfSpades);
@@ -56,12 +60,12 @@ public class GoFishGameTest {
         testHand.add(kingOfSpades);
         testHand.add(twoOfSpades);
 
-        for(Cards c : goFishGame.dealerHand){
+        for (Cards c : goFishGame.dealerHand) {
             c.seeCards();
         }
 
         System.out.println(" ");
-        for(Cards c : goFishGame.dealerHand){
+        for (Cards c : goFishGame.dealerHand) {
             c.seeCards();
         }
 
@@ -75,12 +79,12 @@ public class GoFishGameTest {
 
     @Test
 
-    public void dealerTakesPlayersCardTest(){
+    public void dealerTakesPlayersCardTest() {
 
         GoFishGame goFishGame = new GoFishGame();
         goFishGame.goFishDealCards();
         goFishGame.dealerTakesPlayersCard(Values.THREE);
-        ArrayList<Cards>testHand = new ArrayList<Cards>();
+        ArrayList<Cards> testHand = new ArrayList<Cards>();
         testHand.add(twoOfSpades);
         testHand.add(fourOfSpades);
         testHand.add(sixOfSpades);
@@ -91,7 +95,7 @@ public class GoFishGameTest {
         testHand.add(nineOfSpades);
 
 
-        for (Cards c : goFishGame.playerHand){
+        for (Cards c : goFishGame.playerHand) {
             c.seeCards();
         }
         assertEquals(goFishGame.dealerHand.get(6).getValue(), testHand.get(6).getValue());
@@ -105,7 +109,7 @@ public class GoFishGameTest {
         goFishGame.formatUserInputPlayerAskingDealer("ace");
         Values expected = Values.ACE;
         Values actual = goFishGame.formatUserInputPlayerAskingDealer("ace");
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
 
     }
 
@@ -116,18 +120,19 @@ public class GoFishGameTest {
         goFishGame.goFishDealCards();
         int expectedSize = 7;
         int actualSize = goFishGame.playerHand.size();
-        assertEquals(expectedSize,actualSize);
+        assertEquals(expectedSize, actualSize);
 
     }
 
     @Test
-    public String getWinnerTest;{
+
+    public void getWinnerTest() {
         GoFishGame testGame = new GoFishGame();
         Integer playerScore = 6;
         Integer dealerScore = 5;
-        String expected  = ("You win!!!");
+        String expected = ("You win!!!");
         String actual = testGame.getWinner();
-        assertEquals(actual,expected);
+        assertEquals(actual, expected);
 
     }
 

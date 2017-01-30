@@ -1,9 +1,11 @@
+package martin.matthew.casino;
+
+import martin.matthew.casino.DeckOfCards;
+import martin.matthew.casino.Suits;
+import martin.matthew.casino.Values;
 import org.junit.Assert;
-import org.junit.Assert.*;
 import org.junit.Test;
-import sun.text.bidi.BidiBase;
-import java.util.ArrayList;
-import java.util.Collections;
+
 import static org.junit.Assert.assertEquals;
 
 

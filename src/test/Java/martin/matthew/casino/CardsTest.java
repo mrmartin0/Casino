@@ -1,3 +1,5 @@
+package martin.matthew.casino;
+
 import org.junit.Assert;
 
 /**
