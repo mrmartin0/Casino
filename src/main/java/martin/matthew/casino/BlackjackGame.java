@@ -9,19 +9,16 @@ import java.util.Scanner;
 class BlackjackGame {
 
 
-        ArrayList<Cards> dealerHand = new ArrayList<Cards>();
-        ArrayList<Cards> playerHand = new ArrayList<Cards>();
-        DeckOfCards blackjackDeck = new DeckOfCards();
-        ArrayList<Cards> dealerBooks = new ArrayList<Cards>();
-        ArrayList<Cards> playerBooks = new ArrayList<Cards>();
-        BlackjackGame blackjackGame = new BlackjackGame();
-        int playerScore;
-        int dealerScore;
-        boolean playerStand;
-        boolean dealerStand;
-        boolean gameIsOver;
-        Values playerChoiceValue; // = formatUserInputPlayerAskingDealer();
-        Scanner scan = new Scanner(System.in);
+        private ArrayList<Cards> dealerHand = new ArrayList<Cards>();
+        private ArrayList<Cards> playerHand = new ArrayList<Cards>();
+        private DeckOfCards blackjackDeck = new DeckOfCards();
+        private BlackjackGame blackjackGame = new BlackjackGame();
+        private int playerScore;
+        private int dealerScore;
+        private boolean playerStand;
+        private boolean dealerStand;
+        private boolean gameIsOver;
+        private Scanner scan = new Scanner(System.in);
 
 
         public void blackjackDealCards() {
@@ -34,7 +31,7 @@ class BlackjackGame {
         }
 
 
-        public void playerHits() {
+        private void playerHits() {
             blackjackDeck.shuffleDeck();
             playerHand.add(blackjackDeck.takeTopCard());
         }
@@ -45,13 +42,13 @@ class BlackjackGame {
             dealerHand.add(blackjackDeck.takeTopCard());
         }
 
-        public boolean playerBusts(){
+        private boolean playerBusts(){
             if(playerScore > 21){
             }
             return true;
         }
 
-        public boolean dealerBusts(){
+        private boolean dealerBusts(){
             if(dealerScore > 21){
             }
             return true;
@@ -92,9 +89,5 @@ class BlackjackGame {
                 playerStand = true;
             }
         }
-
-
-
-
 
 }

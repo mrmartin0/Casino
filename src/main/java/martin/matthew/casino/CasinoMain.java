@@ -12,10 +12,10 @@ public class CasinoMain {
 
     }
 
-    static public void playGoFishGame(){
+    static private void playGoFishGame(){
         GoFishGame firstGame = new GoFishGame();
         firstGame.goFishDealCards();
-        while(firstGame.gameIsOver == false) {
+        while(!firstGame.gameIsOver) {
             firstGame.playerTurn();
             firstGame.dealerTurn();
             firstGame.gameIsOver = firstGame.getIfGameIsOver();

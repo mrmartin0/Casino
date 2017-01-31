@@ -9,7 +9,7 @@ import java.util.Collections;
 public class DeckOfCards extends ArrayList {
     ArrayList<Cards> deckOfCards = new ArrayList<Cards>();
 
-    public DeckOfCards() {
+    DeckOfCards() {
         for (Suits s : Suits.values()) {
             for (Values v : Values.values()) {
                 Cards card = new Cards(s, v);
@@ -26,14 +26,14 @@ public class DeckOfCards extends ArrayList {
         }
     }
 
-    public Cards takeTopCard() {
+    Cards takeTopCard() {
         Cards card = deckOfCards.get(0);
         deckOfCards.remove(0);
 
         return card;
     }
 
-    public void shuffleDeck() {
+    void shuffleDeck() {
         Collections.shuffle(deckOfCards);
 
     }

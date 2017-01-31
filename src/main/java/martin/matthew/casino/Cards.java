@@ -1,32 +1,52 @@
 package martin.matthew.casino;
 
+import java.util.ArrayList;
+
 /**
  * Created by matthewmartin on 1/27/17.
  */
 
 class Cards {
-    Suits suit;
-    Values value;
+    private Suits suit;
+    private Values value;
+    private ArrayList<Cards> dealerHand = new ArrayList<Cards>();
+    private ArrayList<Cards> playerHand = new ArrayList<Cards>();
 
-    public Suits getSuit() {
+    Suits getSuit() {
         return suit;
     }
 
-    public Values getValue() {
+    Values getValue() {
         return value;
     }
 
-    public Cards(Suits suit, Values value){
+    Cards(Suits suit, Values value){
         this.suit = suit;
         this.value = value;
 
     }
 
-    public void seeCards(){
+    void seeCards(){
         System.out.print(this.value + " of ");
         System.out.println(this.suit);
 
     }
 
 
+    public void seePlayerHand() {
+        for (Cards c : playerHand) {
+            c.seeCards();
+        }
+    }
+
+
+    public void seeDealerHand() {
+        for (Cards c : dealerHand) {
+            c.seeCards();
+        }
+    }
+
+
 }
+
+

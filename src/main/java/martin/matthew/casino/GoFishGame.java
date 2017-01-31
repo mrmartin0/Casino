@@ -1,27 +1,23 @@
 package martin.matthew.casino;
-
-import jdk.internal.org.objectweb.asm.tree.analysis.Value;
-
 import java.util.*;
 
-import static jdk.nashorn.internal.objects.NativeArray.lastIndexOf;
 
 /**
  * Created by matthewmartin on 1/27/17.
  */
 class GoFishGame {
-    ArrayList<Cards> dealerHand = new ArrayList<Cards>();
-    ArrayList<Cards> playerHand = new ArrayList<Cards>();
-    DeckOfCards goFishDeck = new DeckOfCards();
-    int playerScore = 0;
-    int dealerScore = 0;
-    Values playerChoiceValue; // = formatUserInputPlayerAskingDealer();
-    Scanner scan = new Scanner(System.in);
-    int matchCounter;
-    boolean gameIsOver = false;
+    ArrayList<Cards> dealerHand = new ArrayList<>();
+    ArrayList<Cards> playerHand = new ArrayList<>();
+    private DeckOfCards goFishDeck = new DeckOfCards();
+    private int playerScore = 0;
+    private int dealerScore = 0;
+    private Values playerChoiceValue;
+    private Scanner scan = new Scanner(System.in);
+    private int matchCounter;
+    boolean gameIsOver;
 
 
-    public void goFishDealCards() {
+    void goFishDealCards() {
             goFishDeck.shuffleDeck();
         for (int i = 0; i < 7; i++) {
             playerHand.add(goFishDeck.takeTopCard());
@@ -31,7 +27,7 @@ class GoFishGame {
         sortPlayerHand();
     }
 
-    public void seePlayerHand() {
+    private void seePlayerHand() {
         for (Cards c : playerHand) {
             c.seeCards();
         }
@@ -44,8 +40,9 @@ class GoFishGame {
         }
     }
 
+    //keeps printing true or false
 
-    public boolean getIfGameIsOver() {
+    boolean getIfGameIsOver() {
         if ((playerScore > 6) || (dealerScore > 6)) {
             System.out.println(playerScore + "is player score" + dealerScore + "is dealer score");
             return true;
@@ -57,7 +54,7 @@ class GoFishGame {
     }
 
 
-    public String getWinner() {
+    String getWinner() {
         if (playerScore > dealerScore) {
             return "You win!!!";
         } else if (dealerScore > playerScore) {
@@ -67,27 +64,13 @@ class GoFishGame {
     }
 
 
-    public void playerTakeCard() {
-        goFishDeck.shuffleDeck();
-        playerHand.add(goFishDeck.takeTopCard());
-        seePlayerHand();
-    }
-
-
-    public void dealerTakeCard() {
-        goFishDeck.shuffleDeck();
-        dealerHand.add(goFishDeck.takeTopCard());
-        sortDealerHand();
-    }
-
-
-    public String playerAsksDealer() {
+    private String playerAsksDealer() {
         System.out.println("\nWhat card do you think the dealer has?");
         return scan.nextLine();
     }
 
 
-    public Values formatUserInputPlayerAskingDealer(String playerChoice) {
+    Values formatUserInputPlayerAskingDealer(String playerChoice) {
         //   String playerChoice = playerAsksDealer();
         Values result = null;
         switch (playerChoice.toUpperCase()) {
@@ -136,11 +119,11 @@ class GoFishGame {
         }
         return result;
     }
+//issue here with matchcounter not counting
 
-
-    public int checkDealersHandForMatch(Values playerChoiceValue) {
+    int checkDealersHandForMatch(Values playerChoiceValue) {
         matchCounter = 0;
-        for (int i = 0; i < dealerHand.size(); i++) {
+        for(int i = 0; i < dealerHand.size(); i++) {
             if (dealerHand.get(i).getValue().equals(playerChoiceValue)) {
                 matchCounter++;
             }
@@ -149,7 +132,7 @@ class GoFishGame {
     }
 
 
-    public int checkPlayersHandForMatch(Values dealerChoiceValue) {
+    private int checkPlayersHandForMatch(Values dealerChoiceValue) {
         matchCounter = 0;
         for (int i = 0; i < playerHand.size(); i++) {
             if (playerHand.get(i).getValue().equals(dealerChoiceValue)) {
@@ -162,14 +145,14 @@ class GoFishGame {
 
     public void dealerLooksForMatch() {
         if (matchCounter == 0) {
-            System.out.println("\nGo Fish");
+          System.out.println("\nGo Fish");  //Out of order
         } else {
-            System.out.println("\nYes, I have " + matchCounter + "" + playerChoiceValue);
+            System.out.println("\nYes, I have that");
         }
     }
 
 
-    public void playerTakesDealersCard(Values valuePlayerWants) {
+    void playerTakesDealersCard(Values valuePlayerWants) {
 
         ArrayList<Suits> dealerCardSuits = new ArrayList<>();
         for (Cards c : dealerHand) {
@@ -191,7 +174,7 @@ class GoFishGame {
     }
 
 
-    public void dealerTakesPlayersCard(Values valueDealerWants) {
+    void dealerTakesPlayersCard(Values valueDealerWants) {
 
         ArrayList<Suits> playerCardSuits = new ArrayList<>();
         for (Cards c : playerHand) {
@@ -213,15 +196,15 @@ class GoFishGame {
     }
 
 
-    public void playerGoesFish() {
+    private void playerGoesFish() {
         playerHand.add(goFishDeck.takeTopCard());
-    //    seePlayerHand();
+        sortPlayerHand();
         System.out.println("\nplayer goes fish, picks a " + playerHand.get(playerHand.size()-1).getValue());
 
     }
 
 
-    public void dealerGoesFish() {
+    private void dealerGoesFish() {
         dealerHand.add(goFishDeck.takeTopCard());
         sortDealerHand();
         System.out.println("\ndealer goes fish");
@@ -229,18 +212,18 @@ class GoFishGame {
     }
 
 
-    public void playGame() {
-        goFishDealCards();
-        while (gameIsOver == false) {
-            playerTurn();
-            dealerTurn();
-            gameIsOver = getIfGameIsOver();
-        }
-        getWinner();
-    }
+//    public void playGame() {
+//        goFishDealCards();
+//        while (!gameIsOver) {
+//            playerTurn();
+//            dealerTurn();
+//            gameIsOver = getIfGameIsOver();
+//        }
+//        getWinner();
+//    }
 
 
-    public void playerTurn() {
+    void playerTurn() {
         System.out.println("\nYour hand is \n");
         seePlayerHand();
         String playerChoice = playerAsksDealer();
@@ -259,9 +242,7 @@ class GoFishGame {
     }
 
 
-    public void dealerTurn() {
-//        System.out.println("\nYour hand is ");
-//        seePlayerHand();
+    void dealerTurn() {
 
         if (dealerHand.size() == 0) {
             dealerGoesFish();
@@ -269,6 +250,7 @@ class GoFishGame {
 
         Values valueDealerWants = dealerHand.get((int) (Math.random() * dealerHand.size())).getValue();
         System.out.println("\nThe dealer is asking for a " + valueDealerWants);
+
         if (checkPlayersHandForMatch(valueDealerWants) == 0) {
             dealerGoesFish();
         } else {
@@ -279,7 +261,7 @@ class GoFishGame {
     }
 
 
-    public void bookPlayerEngine(){
+    private void bookPlayerEngine(){
         if(checkPlayersHandForBook()){
             Values bookValue =  playersBookValue();
             addToPlayersBooks(bookValue);
@@ -288,15 +270,15 @@ class GoFishGame {
     }
 
 
-    public void bookDealerEngine() {
-        if (checkDealersHandForBook()) {
-            Values bookValue = dealerBookValue();
-            addToDealerBooks(bookValue);
+//    public void bookDealerEngine() {
+//        if (checkDealersHandForBook()) {
+//            Values bookValue = dealerBookValue();
+//            addToDealerBooks(bookValue);
+//
+//        }
+//    }
 
-        }
-    }
-
-    public void sortPlayerHand() {
+    private void sortPlayerHand() {
 
         Collections.sort(playerHand, new Comparator<Cards>() {
             @Override
@@ -307,7 +289,7 @@ class GoFishGame {
     }
 
 
-    public void sortDealerHand() {
+    private void sortDealerHand() {
 
         Collections.sort(dealerHand, new Comparator<Cards>() {
             @Override
@@ -317,8 +299,10 @@ class GoFishGame {
         });
     }
 
+//2nd suspect area for boolean return
 
-    public Boolean checkPlayersHandForBook() {
+
+    private boolean checkPlayersHandForBook() {
         matchCounter = 0;
         for (int i = 0; i < playerHand.size() - 1; i++)
             if (playerHand.get(i).getValue().equals(playerHand.get(i + 1).getValue())) {
@@ -331,7 +315,7 @@ class GoFishGame {
     }
 
 
-    public Values playersBookValue() {
+    private Values playersBookValue() {
         matchCounter = 0;
         for (int i = 0; i < playerHand.size() - 1; i++)
             if (playerHand.get(i).getValue().equals(playerHand.get(i + 1).getValue())) {
@@ -344,7 +328,7 @@ class GoFishGame {
     }
 
 
-    public void addToPlayersBooks(Values playerBookValue) {
+    private void addToPlayersBooks(Values playerBookValue) {
         playerScore++;
 
             for (Iterator<Cards> iterator = playerHand.iterator(); iterator.hasNext(); ) {
@@ -356,44 +340,44 @@ class GoFishGame {
             }
     }
 
-
-    public Boolean checkDealersHandForBook(){
-        matchCounter = 0;
-        for (int i = 0; i < dealerHand.size() - 1; i++)
-            if (dealerHand.get(i).getValue().equals(dealerHand.get(i + 1).getValue())) {
-                matchCounter++;
-                if (matchCounter == 4) {
-                    return true;
-                }
-            }
-        return false;
-    }
-
-
-    public Values dealerBookValue() {
-        matchCounter = 0;
-        for (int i = 0; i < dealerHand.size() - 1; i++)
-            if (dealerHand.get(i).getValue().equals(dealerHand.get(i + 1).getValue())) {
-                matchCounter++;
-                if (matchCounter == 4) {
-                    return dealerHand.get(i).getValue();
-                }
-            }
-        return Values.ACE;
-    }
+//
+//    private Boolean checkDealersHandForBook(){
+//        matchCounter = 0;
+//        for (int i = 0; i < dealerHand.size() - 1; i++)
+//            if (dealerHand.get(i).getValue().equals(dealerHand.get(i + 1).getValue())) {
+//                matchCounter++;
+//                if (matchCounter == 4) {
+//                    return true;
+//                }
+//            }
+//        return false;
+//    }
 
 
-    public void addToDealerBooks(Values dealerBookValue) {
-        playerScore++;
+//    private Values dealerBookValue() {
+//        matchCounter = 0;
+//        for (int i = 0; i < dealerHand.size() - 1; i++)
+//            if (dealerHand.get(i).getValue().equals(dealerHand.get(i + 1).getValue())) {
+//                matchCounter++;
+//                if (matchCounter == 4) {
+//                    return dealerHand.get(i).getValue();
+//                }
+//            }
+//        return Values.ACE;
+//    }
 
-        for (Iterator<Cards> iterator = dealerHand.iterator(); iterator.hasNext(); ) {
-            Cards card = iterator.next();
-            if (card.getValue() == dealerBookValue) {
-                iterator.remove();
-                dealerScore++;
-            }
-        }
-    }
+
+//    private void addToDealerBooks(Values dealerBookValue) {
+//        dealerScore++;
+//
+//        for (Iterator<Cards> iterator = dealerHand.iterator(); iterator.hasNext(); ) {
+//            Cards card = iterator.next();
+//            if (card.getValue() == dealerBookValue) {
+//                iterator.remove();
+//                dealerScore++;
+//            }
+//        }
+//    }
 
 
 }
