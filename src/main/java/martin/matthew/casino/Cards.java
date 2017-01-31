@@ -22,11 +22,9 @@ class Cards {
 
     }
 
-    public String seeCards(){
-
-        return (this.value + " of " + this.suit);
-        //       System.out.print(this.value + " of ");
- //       System.out.println(this.suit);
+    public void seeCards(){
+        System.out.print(this.value + " of ");
+        System.out.println(this.suit);
 
     }
 
