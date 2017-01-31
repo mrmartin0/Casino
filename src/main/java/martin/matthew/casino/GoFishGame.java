@@ -235,7 +235,6 @@ class GoFishGame {
             playerTurn();
             dealerTurn();
             gameIsOver = getIfGameIsOver();
-            System.out.println(gameIsOver);
         }
         getWinner();
     }
